@@ -2012,6 +2012,7 @@ input::-moz-focus-inner {
   .intro-pic {
     top: 12%;
     left: 40%;
+    margin-left: 10%;
   }
 
   .intro-pic::before {
@@ -2278,7 +2279,7 @@ input::-moz-focus-inner {
     padding-right: 30px;
   }
 
-  .about-experience__timeline .column::last-child {
+  .about-experience__timeline .column:last-child {
     padding-left: 30px;
   }
 
@@ -3299,11 +3300,11 @@ input::-moz-focus-inner {
   }
 
   .contact-email {
-    font-size: 9vw;
+    font-size: 21px;
   }
 
   .contact-infos {
-    font-size: 3.6rem;
+    font-size: 21px;
   }
 }
 
