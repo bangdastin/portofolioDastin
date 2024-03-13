@@ -2013,6 +2013,9 @@ input::-moz-focus-inner {
     top: 12%;
     left: 40%;
     margin-left: 10%;
+    margin-bottom: 20%;
+    margin-right: 10%;
+    margin-top: 10%;
   }
 
   .intro-pic::before {
