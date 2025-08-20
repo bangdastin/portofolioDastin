@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dastin Sirait - My Certifications</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================================================================
+         * Variables - Ganti warna dan font dengan mudah di sini
+         * =================================================================== */
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+
+            --color-bg: #0A0A0A; /* Sedikit lebih lembut dari hitam pekat */
+            --color-text: #E0E0E0;
+            --color-heading: #FFFFFF;
+            --color-accent: #E91E63; /* Warna pink/magenta yang menarik */
+            --color-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===================================================================
+         * Base Styles
+         * =================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* ===================================================================
+         * Header & Back Button
+         * =================================================================== */
+        .main-header {
+            /* Header sekarang hanya sebagai container untuk tombol */
+            position: relative;
+            height: 80px; /* Memberi sedikit ruang di atas */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .back-button svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-heading);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover svg {
+            stroke: var(--color-accent);
+            transform: rotate(90deg); /* Efek animasi menarik saat hover */
+        }
+
+
+        /* ===================================================================
+         * Page Title
+         * =================================================================== */
+        .page-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            color: var(--color-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-family: var(--font-sans);
+            color: var(--color-accent);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* ===================================================================
+         * Certification Grid - Bagian Utama
+         * =================================================================== */
+        .certification-grid {
+            display: grid;
+            /* Membuat grid responsif secara otomatis */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-item {
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #111;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .cert-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cert-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===================================================================
+         * Modal (Lightbox) untuk Pop-up Gambar
+         * =================================================================== */
+        .modal {
+            display: none; /* Disembunyikan secara default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Animasi saat modal muncul */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            animation: zoomIn 0.4s ease-out;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        /* ===================================================================
+         * Responsive
+         * =================================================================== */
+         @media (max-width: 768px) {
+            .page-title h1 {
+                font-size: 2.5rem;
+            }
+            .certification-grid {
+                grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+            }
+            .back-button {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+         }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="index.html" class="back-button" aria-label="Back to homepage">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </a>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-title">
+                <h1>My Certifications</h1>
+                <p>A collection of my achievements and credentials.</p>
+            </div>
+
+            <div class="certification-grid">
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi1.png" alt="Sertifikat 1">
+                </div>
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi2.png" alt="Sertifikat 2">
+                </div>
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi3.png" alt="Sertifikat 3">
+                </div>
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi4.png" alt="Sertifikat 4">
+                </div>
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi5.png" alt="Sertifikat 5">
+                </div>
+                <div class="cert-item">
+                    <img src="images\portfolio\sertifikasi\Sertifikasi6.png" alt="Sertifikat 6">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="myModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        // Ambil semua elemen yang diperlukan
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('img01');
+        const certItems = document.querySelectorAll('.cert-item img');
+        const closeBtn = document.querySelector('.close-button');
+
+        // Fungsi untuk membuka modal
+        function openModal(e) {
+            modal.style.display = 'flex'; // Menggunakan flex untuk centering
+            modal.style.animation = 'fadeIn 0.4s';
+            modalImg.src = e.target.src;
+            document.body.style.overflow = 'hidden'; // Mencegah scroll background
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            modal.style.display = 'none';
+            modal.style.animation = '';
+            document.body.style.overflow = 'auto'; // Mengembalikan fungsi scroll
+        }
+
+        // Tambahkan event listener untuk setiap gambar sertifikat
+        certItems.forEach(item => {
+            item.addEventListener('click', openModal);
+        });
+
+        // Event listener untuk tombol close
+        closeBtn.addEventListener('click', closeModal);
+
+        // Event listener untuk menutup modal dengan klik di luar gambar
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

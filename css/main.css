@@ -1871,13 +1871,14 @@ input::-moz-focus-inner {
   background-repeat: no-repeat;
   background-position: top center;
   background-image: url(../images/hero-pic.png);
-  background-size: cover;
+  background-size: 70%; /* dari cover diganti 80% supaya lebih kecil */
   position: absolute;
   top: 30%;
   right: 0;
   bottom: 0;
   left: 50%;
 }
+
 
 .intro-pic::before {
   content: "";
@@ -1919,6 +1920,14 @@ input::-moz-focus-inner {
 
 .intro-text h1 {
   font-size: 7.8rem;
+  font-weight: 500;
+  line-height: 1.179;
+  color: #ffffff;
+  margin-top: 0;
+}
+
+.intro-text h2 {
+  font-size: 4rem;
   font-weight: 500;
   line-height: 1.179;
   color: #ffffff;
@@ -2102,109 +2111,141 @@ input::-moz-focus-inner {
  * # about
  *
  * ------------------------------------------------------------------- */
+/* ===================================================================
+ * Variables & Base Styles
+ * =================================================================== */
+:root {
+  /* Colors */
+  --color-background: #ffffff;
+  --color-text: #000000;
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-border-strong: rgba(0, 0, 0, 0.25);
+
+  /* Spacing (menggunakan skala modular untuk konsistensi) */
+  --space-xs: 0.8rem;   /* 8px */
+  --space-sm: 1.6rem;   /* 16px */
+  --space-md: 2.4rem;   /* 24px */
+  --space-lg: 3.2rem;   /* 32px */
+  --space-xl: 4.8rem;   /* 48px */
+  --space-xxl: 6.4rem;  /* 64px */
+  
+  /* Timeline Specific */
+  --timeline-line-width: 1px;
+  --timeline-icon-area-width: 6rem; /* Lebar area ikon dan garis */
+}
+
+/* ===================================================================
+ * About Section
+ * =================================================================== */
 .s-about {
-  padding-top: 19.2rem;
-  padding-bottom: 16.8rem;
-  background-color: #ffffff;
+  padding: 18rem 0; /* Disederhanakan, bisa diubah di media query jika perlu */
+  background-color: var(--color-background);
 }
 
 .s-about .row {
   max-width: 1140px;
 }
 
-.s-about > [class*="about-"] {
-  margin-bottom: 15.2rem;
-}
-
-.s-about > [class*="about-"]:last-child {
-  margin-bottom: 0;
+/* Menggunakan 'gap' untuk spasi antar section di dalam .s-about */
+.s-about {
+  display: flex;
+  flex-direction: column;
+  gap: 15rem;
 }
 
 .about-me__text {
-  -webkit-columns: 2 360px;
-  -moz-columns: 2 360px;
   columns: 2 360px;
-  column-gap: 64px;
+  column-gap: var(--space-xxl);
 }
 
 .about-me__buttons {
-  margin-top: 4.8rem;
+  margin-top: var(--space-xl);
+  display: flex; /* Menggunakan flexbox untuk spasi yang lebih baik */
+  gap: var(--space-lg);
 }
+/* Menghapus padding spesifik pada .column, 'gap' sudah menanganinya */
 
-.about-me__buttons .column:first-child {
-  padding-right: 32px;
-}
-
-.about-me__buttons .column:last-child {
-  padding-left: 32px;
-}
-
+/* ===================================================================
+ * Timeline
+ * =================================================================== */
 .about-experience__timeline {
-  margin-top: 1.6rem;
-}
-
-.about-experience__timeline .column:first-child {
-  padding-right: 40px;
-}
-
-.about-experience__timeline .column:last-child {
-  padding-left: 40px;
+  display: flex;
+  gap: var(--space-xxl);
 }
 
 .timeline {
-  padding-top: 4.8rem;
-  padding-left: 45%;
+  /* Properti BARU untuk mengatur posisi */
+  max-width: 420px; /* Atur lebar maksimum timeline, sesuaikan angka ini */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Properti LAMA yang dipertahankan */
+  width: 100%;
   position: relative;
+  padding-top: var(--space-xl);
 }
 
+/* Garis vertikal utama */
 .timeline::before {
   content: "";
   display: block;
-  width: 1px;
+  width: var(--timeline-line-width);
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: var(--color-border);
   position: absolute;
-  left: 0;
+  left: calc(var(--timeline-icon-area-width) / 2); /* Tepat di tengah area ikon */
   top: 0;
-  margin-left: 45%;
+  transform: translateX(-50%);
 }
 
-.timeline::after {
-  content: "";
-  display: block;
-  width: 5.6rem;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.12);
-  position: absolute;
-  left: 1px;
-  top: 0;
-  margin-left: 45%;
+.timeline__block {
+  display: grid;
+  /* Kolom pertama untuk ikon, kolom kedua untuk konten */
+  grid-template-columns: var(--timeline-icon-area-width) 1fr;
+  gap: var(--space-lg);
+  position: relative;
+  margin-top: var(--space-md);
 }
 
+.timeline__block:first-of-type {
+  margin-top: 0;
+}
+
+/* Titik penanda pada garis timeline */
+.timeline__bullet {
+  position: absolute;
+  left: calc(var(--timeline-icon-area-width) / 2);
+  top: 0.8rem;
+  width: 3px;
+  height: var(--space-xl);
+  background-color: var(--color-text);
+  transform: translateX(-50%);
+}
+
+/* Ikon header (Work/Education) */
 .timeline__icon-wrap {
-  display: block;
+  grid-column: 1 / 2; /* Letakkan di kolom pertama grid */
+  position: absolute;
+  top: calc(-1 * var(--space-md)); /* Posisikan di atas konten blok */
+  left: calc(var(--timeline-icon-area-width) / 2);
+  transform: translateX(-50%);
+
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  position: absolute;
-  top: -2.2rem;
-  left: 5.6rem;
-  margin-left: 45%;
+  border: 1px solid var(--color-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background); /* Agar menutupi garis vertikal */
 }
 
 .timeline__icon {
-  display: block;
   width: 2.5rem;
   height: 2.5rem;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-size: contain;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-  position: absolute;
-  left: 50%;
-  top: 50%;
 }
 
 .timeline__icon--work {
@@ -2215,31 +2256,10 @@ input::-moz-focus-inner {
   background-image: url(../images/icons/icon-education.svg);
 }
 
-.timeline__block {
-  position: relative;
-  padding-left: 5.6rem;
-  padding-bottom: 0.8rem;
-  margin-top: 2.8rem;
-  min-height: 35.6rem;
-}
-
-.timeline .timeline__block:last-child {
-  padding-bottom: 0;
-}
-
-.timeline__bullet {
-  content: "";
-  display: block;
-  width: 3px;
-  height: 4.8rem;
-  background-color: #000000;
-  position: absolute;
-  left: -1px;
-  top: 8px;
-}
-
+/* Konten header timeline */
 .timeline__header {
-  margin-bottom: 3.2rem;
+  grid-column: 2 / 3; /* Letakkan di kolom kedua grid */
+  margin-bottom: var(--space-lg);
 }
 
 .timeline__header .timeline__timeframe,
@@ -2253,8 +2273,8 @@ input::-moz-focus-inner {
   line-height: 1.714;
   text-transform: uppercase;
   letter-spacing: 0.3rem;
-  margin-bottom: 0.8rem;
-  color: #000000;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text);
 }
 
 .timeline__header h3 {
@@ -2268,60 +2288,23 @@ input::-moz-focus-inner {
   margin-top: 0;
 }
 
-/* ------------------------------------------------------------------- 
- * responsive:
- * about
- * ------------------------------------------------------------------- */
+.timeline__desc {
+  grid-column: 2 / 3; /* Letakkan juga di kolom kedua */
+}
+
+
+/* ===================================================================
+ * Responsive
+ * =================================================================== */
 @media screen and (max-width: 1200px) {
-  .s-about {
-    padding-top: 17.2rem;
-    padding-bottom: 15.6rem;
-  }
-
-  .about-experience__timeline .column:first-child {
-    padding-right: 30px;
-  }
-
-  .about-experience__timeline .column:last-child {
-    padding-left: 30px;
-  }
-
-  .timeline::after {
-    width: 4.4rem;
-  }
-
-  .timeline__icon-wrap {
-    left: 4.4rem;
-  }
-
-  .timeline__block {
-    padding-left: 4.4rem;
-  }
-
-  .timeline__header h5 {
-    font-size: 1.8rem;
+  .s-about .row {
+    max-width: 980px;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .about-me__text {
-    column-gap: 40px;
-  }
-
-  .about-me__buttons .column:first-child {
-    padding-right: 20px;
-  }
-
-  .about-me__buttons .column:last-child {
-    padding-left: 20px;
-  }
-
-  .about-experience__timeline .column:first-child {
-    padding-right: 16px;
-  }
-
-  .about-experience__timeline .column:last-child {
-    padding-left: 16px;
+    column-gap: var(--space-xl);
   }
 }
 
@@ -2329,106 +2312,43 @@ input::-moz-focus-inner {
   .s-about .row {
     max-width: 700px;
   }
-
-  .about-me__buttons .column:first-child {
-    padding-right: 16px;
-  }
-
-  .about-me__buttons .column:last-child {
-    padding-left: 16px;
-  }
-
-  .about-experience__timeline .column {
-    -webkit-flex: 0 0 100%;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .about-experience__timeline .column:first-child {
-    margin-bottom: 9.6rem;
-  }
-
-  .timeline::after {
-    width: 5.6rem;
-  }
-
-  .timeline__icon-wrap {
-    left: 5.6rem;
-  }
-
-  .timeline__block {
-    min-height: 0;
-    padding-left: 5.6rem;
+  
+  /* Membuat timeline menjadi satu kolom */
+  .about-experience__timeline {
+    flex-direction: column;
   }
 }
 
 @media screen and (max-width: 800px) {
   .s-about {
-    padding-top: 16rem;
+    padding: 16rem 0;
   }
-
   .s-about .row {
     max-width: 600px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .about-me__buttons .column:first-child,
-  .about-experience__timeline .column:first-child {
-    padding-right: 10px;
+  .about-me__text {
+    /* Menghilangkan kolom, menjadi 1 kolom saja */
+    columns: 1;
   }
-
-  .about-me__buttons .column:last-child,
-  .about-experience__timeline .column:last-child {
-    padding-left: 10px;
-  }
-
-  .timeline::after {
-    width: 4.4rem;
-  }
-
-  .timeline__icon-wrap {
-    left: 4.4rem;
-  }
-
-  .timeline__block {
-    padding-left: 4.4rem;
-  }
-
-  .timeline__header h5 {
-    font-size: 1.8rem;
+  .about-me__buttons {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .s-about > [class*="about-"] {
-    margin-bottom: 14rem;
+  :root {
+    /* Mengurangi spasi di layar sangat kecil */
+    --space-lg: 2.8rem;
+    --space-xl: 4rem;
   }
-
-  .about-me__buttons .column:first-child,
-  .about-experience__timeline .column:first-child {
-    padding-right: 0;
-  }
-
-  .about-me__buttons .column:last-child,
-  .about-experience__timeline .column:last-child {
-    padding-left: 0;
-  }
-
-  .timeline::after {
-    width: 2.8rem;
-  }
-
-  .timeline__icon-wrap {
-    left: 2.8rem;
-  }
-
-  .timeline__block {
-    padding-left: 2.8rem;
+  .s-about {
+    gap: 12rem;
   }
 }
-
 /* ===================================================================
  * # services
  *
