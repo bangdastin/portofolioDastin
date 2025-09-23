@@ -1869,16 +1869,22 @@ input::-moz-focus-inner {
 
 .intro-pic {
   background-repeat: no-repeat;
-  background-position: top center;
-  background-image: url(../images/hero-pic.png);
-  background-size: 70%; /* dari cover diganti 80% supaya lebih kecil */
+  background-position: center;
+  background-image: url(../images/hero-pic.jpg);
+  background-size: cover; /* biar gambar penuh */
+  
   position: absolute;
-  top: 30%;
+  top: 10%;
   right: 0;
   bottom: 0;
   left: 50%;
+  width: 600px;  /* tentukan ukuran lingkaran */
+  height: 600px;
+  border-radius: 50%; /* bikin bulat */
+  overflow: hidden;   /* biar gambar ikut terpotong bulat */
+  margin: auto;
+  filter: sepia(40%) contrast(90%) brightness(85%) saturate(80%); /* efek vintage */
 }
-
 
 .intro-pic::before {
   content: "";
@@ -1887,9 +1893,11 @@ input::-moz-focus-inner {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
-  opacity: 0.2;
+  
+  background-color: rgba(0, 0, 0, 0.3); /* lapisan gelap */
+  border-radius: 50%; /* ikut bulat */
 }
+
 
 .intro-grid {
   background-image: url(../images/pattern-dot-grid.svg);
