@@ -1878,8 +1878,8 @@ input::-moz-focus-inner {
   right: 0;
   bottom: 0;
   left: 50%;
-  width: 600px;  /* tentukan ukuran lingkaran */
-  height: 600px;
+  width: 400px;  /* tentukan ukuran lingkaran */
+  height: 400px;
   border-radius: 50%; /* bikin bulat */
   overflow: hidden;   /* biar gambar ikut terpotong bulat */
   margin: auto;
@@ -2020,7 +2020,7 @@ input::-moz-focus-inner {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 500px) {
   .intro-content {
     width: 88%;
     padding-top: 8rem;
